@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/01 23:40:47 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/02 19:46:40 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 void	swap(t_list	**head);
 void	swap_a(t_list **head);
+void	display_stacks(t_list *stack_a, t_list *stack_b);
 
 #endif

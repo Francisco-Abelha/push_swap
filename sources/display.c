@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 19:51:32 by fgoncal2         ###   ########.fr       */
+/*   Created: 2026/01/02 19:37:11 by fgoncal2          #+#    #+#             */
+/*   Updated: 2026/01/02 19:51:16 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int argc, char **argv)
+void	display_stacks(t_list *stack_a, t_list *stack_b)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	int		i;
-
-	if (argc < 2)
-		return (0);
-	i = 1;
-	stack_a = ft_lstnew(argv[i]);
-	stack_b = NULL;
-	i++;
-	while (argv[i])
+	if (!stack_a && !stack_b)
+		return ;
+	while (stack_a != NULL || stack_b != NULL)
 	{
-		ft_lstadd_back(&stack_a, ft_lstnew(argv[i]));
-		i++;
+		if (stack_a != NULL)
+		{
+			ft_printf("  [%s]", stack_a->content);
+			stack_a = stack_a->next;
+		}
+		else
+			ft_printf("  [ ]");
+		if (stack_b != NULL)
+		{
+			ft_printf("  [%s]\n", stack_b->content);
+			stack_b = stack_b->next;
+		}
+		else
+			ft_printf("  [ ]\n");
 	}
-	swap_a(&stack_a);
-	display_stacks(stack_a, stack_b);
 }
