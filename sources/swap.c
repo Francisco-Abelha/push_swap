@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/01 23:40:47 by fgoncal2         ###   ########.fr       */
+/*   Created: 2026/01/01 23:28:16 by fgoncal2          #+#    #+#             */
+/*   Updated: 2026/01/02 00:12:57 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../includes/push_swap.h"
 
-# include "../libft/includes/libft.h"
-# include "../libft/includes/ft_printf.h"
+void	swap(t_list	**head)
+{
+	t_list	*tmp;
+	
+	if (!*head || (*head)->next == NULL)
+		return ;
+	tmp = *head;
+	*head = (*head)->next;
+	tmp->next = (*head)->next;
+	(*head)->next = tmp;
+}
 
-void	swap(t_list	**head);
-void	swap_a(t_list **head);
-
-#endif
+void	swap_a(t_list **head)
+{
+	swap(head);
+}
