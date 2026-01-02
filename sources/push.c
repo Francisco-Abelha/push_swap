@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 23:28:16 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 23:26:39 by fgoncal2         ###   ########.fr       */
+/*   Created: 2026/01/02 19:55:00 by fgoncal2          #+#    #+#             */
+/*   Updated: 2026/01/02 23:14:14 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	swap(t_list	**head)
+void	push_a(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*tmp;
-	
-	if (!*head || (*head)->next == NULL)
-		return ;
-	tmp = *head;
-	*head = (*head)->next;
-	tmp->next = (*head)->next;
-	(*head)->next = tmp;
+	t_list	*node;
+
+	node = *stack_b;
+	(*stack_b) = (*stack_b)->next;
+	node->next = NULL;
+	ft_lstadd_front(stack_a, node);
 }
 
-void	swap_a(t_list **stack_a)
+void	push_b(t_list **stack_a, t_list **stack_b)
 {
-	swap(stack_a);
-}
+	t_list	*node;
 
-void	swap_b(t_list **stack_b)
-{
-	swap(stack_b);
-}
-
-void	swap_both(t_list **stack_a, t_list **stack_b)
-{
-	swap(stack_a);
-	swap(stack_b);
+	node = *stack_a;
+	(*stack_a) = (*stack_a)->next;
+	node->next = NULL;
+	ft_lstadd_front(stack_b, node);
 }

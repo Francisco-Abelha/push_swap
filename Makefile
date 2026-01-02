@@ -6,7 +6,7 @@
 #    By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/01 18:20:26 by fgoncal2          #+#    #+#              #
-#    Updated: 2026/01/02 19:38:27 by fgoncal2         ###   ########.fr        #
+#    Updated: 2026/01/02 19:56:27 by fgoncal2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/push_swap.c \
 	   $(SRC_DIR)/swap.c \
-	   $(SRC_DIR)/display.c
+	   $(SRC_DIR)/display.c \
+	   $(SRC_DIR)/push.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

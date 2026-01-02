@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 19:51:32 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/02 23:20:38 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&stack_a, ft_lstnew(argv[i]));
 		i++;
 	}
-	swap_a(&stack_a);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	display_stacks(stack_a, stack_b);
+
+	ft_printf("--------------\n");
+
+	swap_b(&stack_b);
+	push_a(&stack_a, &stack_b);
+	
 	display_stacks(stack_a, stack_b);
 }
