@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 23:20:38 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/08 14:45:53 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ int	main(int argc, char **argv)
 
 	swap_b(&stack_b);
 	push_a(&stack_a, &stack_b);
+	
+	display_stacks(stack_a, stack_b);
+
+	ft_printf("-------------\n");
+	
+	rotate_a(&stack_a);
+	
+	display_stacks(stack_a, stack_b);
+
+	ft_printf("-------------\n");
+	
+	reverse_rotate_a(&stack_a);
 	
 	display_stacks(stack_a, stack_b);
 }
