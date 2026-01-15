@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/08 14:45:53 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:10:31 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,24 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	int		i;
+	int		*numbers;
 
-	if (argc < 2)
-		return (0);
-	i = 1;
-	stack_a = ft_lstnew(argv[i]);
+	numbers = parse_args(argc, argv);
+	if (!numbers)
+		return (1);
+	stack_a = ft_lstnew(&numbers[0]);
 	stack_b = NULL;
-	i++;
-	while (argv[i])
+	i = 1;
+	while (i < argc - 1)
 	{
-		ft_lstadd_back(&stack_a, ft_lstnew(argv[i]));
+		ft_lstadd_back(&stack_a, ft_lstnew(&numbers[i]));
 		i++;
 	}
-	push_b(&stack_a, &stack_b);
-	push_b(&stack_a, &stack_b);
+	//push_b(&stack_a, &stack_b);
+	//push_b(&stack_a, &stack_b);
 	display_stacks(stack_a, stack_b);
 
-	ft_printf("--------------\n");
+/* 	ft_printf("--------------\n");
 
 	swap_b(&stack_b);
 	push_a(&stack_a, &stack_b);
@@ -50,5 +51,5 @@ int	main(int argc, char **argv)
 	
 	reverse_rotate_a(&stack_a);
 	
-	display_stacks(stack_a, stack_b);
+	display_stacks(stack_a, stack_b); */
 }

@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 19:37:11 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 23:11:03 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:45:08 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	display_a(int size_a, int row, int max, t_list *stack_a)
 		tmp = stack_a;
 		while (i++ < row - (max - size_a))
 			tmp = tmp->next;
-		ft_printf("  [%s]", (char *)tmp->content);
+		ft_printf("  [%d]", *(int *)tmp->content);
 	}
 }
 
@@ -42,7 +42,7 @@ static void	display_b(int size_b, int row, int max, t_list *stack_b)
 		tmp = stack_b;
 		while (i++ < row - (max - size_b))
 			tmp = tmp->next;
-		ft_printf("  [%s]\n", (char *)tmp->content);
+		ft_printf("  [%d]\n", *(int *)tmp->content);
 	}
 }
 
