@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/13 17:10:31 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:37:42 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,9 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&stack_a, ft_lstnew(&numbers[i]));
 		i++;
 	}
-	//push_b(&stack_a, &stack_b);
-	//push_b(&stack_a, &stack_b);
+	if (is_sorted(stack_a))
+		return 0;
+	sort(&stack_a, &stack_b);
 	display_stacks(stack_a, stack_b);
 
-/* 	ft_printf("--------------\n");
-
-	swap_b(&stack_b);
-	push_a(&stack_a, &stack_b);
-	
-	display_stacks(stack_a, stack_b);
-
-	ft_printf("-------------\n");
-	
-	rotate_a(&stack_a);
-	
-	display_stacks(stack_a, stack_b);
-
-	ft_printf("-------------\n");
-	
-	reverse_rotate_a(&stack_a);
-	
-	display_stacks(stack_a, stack_b); */
 }

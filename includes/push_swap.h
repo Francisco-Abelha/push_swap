@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/13 16:39:33 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:26:59 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,11 @@ void	print_error_and_exit(void);
 int		parse_int(const char *str);
 void	check_duplicates(int *arr, int count);
 int		*parse_args(int argc, char **argv);
+
+//sort
+int		is_sorted(t_list *stack_a);
+void	sort(t_list **stack_a, t_list **stack_b);
+void	sort_3(t_list **stack_a);
+void	radix_sort(t_list **stack_a, t_list **stack_b);
 
 #endif

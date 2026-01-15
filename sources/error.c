@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:07:46 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/13 17:06:10 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 19:07:34 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 void print_error_and_exit(void)
 {
-    write(2, "Error\n", 6);
-    exit(EXIT_FAILURE);
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 long ft_atoi_safe(const char *str)
 {
-    long result = 0;
-    int sign = 1;
+	long result = 0;
+	int sign = 1;
 
-    if (*str == '-' || *str == '+')
-    {
-        if (*str == '-')
-            sign = -1;
-        str++;
-    }
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
 
-    while (*str >= '0' && *str <= '9')
-    {
-        result = result * 10 + (*str - '0');
-        str++;
-    }
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
 
-    return result * sign;
+	return result * sign;
 }
-
 
 int	parse_int(const char *str)
 {
@@ -46,7 +45,7 @@ int	parse_int(const char *str)
 	int		i;
 
 	if ((!*str || (*str == '+' || *str == '-')) && (!str[1]))
-        print_error_and_exit();
+		print_error_and_exit();
 	num = ft_atoi_safe(str);
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
@@ -58,7 +57,7 @@ int	parse_int(const char *str)
 		i++;
 	}
 	if (num < INT_MIN || num > INT_MAX)
-        print_error_and_exit();
+		print_error_and_exit();
 	return ((int)num);
 }
 
@@ -66,7 +65,7 @@ void	check_duplicates(int *arr, int count)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < count)
 	{
@@ -85,7 +84,7 @@ int	*parse_args(int argc, char **argv)
 {
 	int	*numbers;
 	int	i;
-	
+
 	if (argc < 2)
 		return (NULL);
 	numbers = malloc(sizeof(int) * (argc - 1));
