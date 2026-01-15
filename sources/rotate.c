@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:04:30 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/08 15:00:48 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:50:31 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	rotate(t_list **stack)
+static void	rotate(t_list **stack)
 {
 	t_list	*last;
 	t_list	*old_head;
@@ -32,15 +32,18 @@ void	rotate(t_list **stack)
 void	rotate_a(t_list **stack_a)
 {
 	rotate(stack_a);
+	ft_printf("ra\n");
 }
 
 void	rotate_b(t_list **stack_b)
 {
 	rotate(stack_b);
+	ft_printf("rb\n");
 }
 
 void	rotate_both(t_list **stack_a, t_list **stack_b)
 {
 	rotate_a(stack_a);
 	rotate_b(stack_b);
+	ft_printf("rr\n");
 }

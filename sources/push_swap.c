@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/15 20:37:42 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:52:27 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	main(int argc, char **argv)
 	if (is_sorted(stack_a))
 		return 0;
 	sort(&stack_a, &stack_b);
-	display_stacks(stack_a, stack_b);
+	//display_stacks(stack_a, stack_b);
 
 }

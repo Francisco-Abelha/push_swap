@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:32:48 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/08 14:59:54 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:51:48 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	reverse_rotate(t_list **stack)
+static void	reverse_rotate(t_list **stack)
 {
 	t_list	*old_head;
 	t_list	*last;
 	t_list	*second_last;
 	t_list	*traversal;
-	
+
 	if (ft_lstsize(*stack) > 1)
 	{
 		last = ft_lstlast(*stack);
@@ -39,15 +39,18 @@ void	reverse_rotate(t_list **stack)
 void	reverse_rotate_a(t_list **stack_a)
 {
 	reverse_rotate(stack_a);
+	ft_printf("rra\n");
 }
 
 void	reverse_rotate_b(t_list **stack_b)
 {
 	reverse_rotate(stack_b);
+	ft_printf("rrb\n");
 }
 
 void	reverse_rotate_both(t_list **stack_a, t_list **stack_b)
 {
 	reverse_rotate_a(stack_a);
 	reverse_rotate_b(stack_b);
+	ft_printf("rrr\n");
 }

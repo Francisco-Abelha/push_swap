@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 19:55:00 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/02 23:14:14 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:52:18 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 	(*stack_b) = (*stack_b)->next;
 	node->next = NULL;
 	ft_lstadd_front(stack_a, node);
+	ft_printf("pa\n");
 }
 
 void	push_b(t_list **stack_a, t_list **stack_b)
@@ -30,4 +31,5 @@ void	push_b(t_list **stack_a, t_list **stack_b)
 	(*stack_a) = (*stack_a)->next;
 	node->next = NULL;
 	ft_lstadd_front(stack_b, node);
+	ft_printf("pb\n");
 }
