@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 19:08:33 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/15 20:51:58 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/17 02:28:59 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,7 @@ void	sort_5(t_list **stack_a, t_list **stack_b)
 		push_a(stack_a, stack_b);
 }
 
-void	radix_sort(t_list **stack_a, t_list **stack_b)
-{
-	//placeholders
-	swap_a(stack_a);
-	swap_b(stack_b);
-}
-
-void	sort(t_list **stack_a, t_list **stack_b)
+void	sort(t_list **stack_a, t_list **stack_b, int *numbers)
 {
 	int	count;
 
@@ -144,5 +137,5 @@ void	sort(t_list **stack_a, t_list **stack_b)
 	else if (count <= 5)
 		sort_5(stack_a, stack_b);
 	else
-		radix_sort(stack_a, stack_b);
+		radix_sort(stack_a, stack_b, numbers);
 }

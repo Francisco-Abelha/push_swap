@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:07:46 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/15 19:07:34 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/16 23:41:45 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void print_error_and_exit(void)
 
 long ft_atoi_safe(const char *str)
 {
-	long result = 0;
-	int sign = 1;
+	long result;
+	int sign;
 
+	result = 0;
+	sign = 1;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

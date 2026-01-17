@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/15 22:52:50 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/17 13:19:50 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		*parse_args(int argc, char **argv);
 
 //sort
 int		is_sorted(t_list *stack_a);
-void	sort(t_list **stack_a, t_list **stack_b);
+void	sort(t_list **stack_a, t_list **stack_b, int *numbers);
 void	sort_3(t_list **stack_a);
-void	radix_sort(t_list **stack_a, t_list **stack_b);
+void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers);
 
 //display
 void	display_stacks(t_list *stack_a, t_list *stack_b);

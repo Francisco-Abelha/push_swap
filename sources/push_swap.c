@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/15 22:52:27 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/17 14:36:47 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	}
 	if (is_sorted(stack_a))
 		return 0;
-	sort(&stack_a, &stack_b);
+	sort(&stack_a, &stack_b, numbers);
 	//display_stacks(stack_a, stack_b);
 
 }
