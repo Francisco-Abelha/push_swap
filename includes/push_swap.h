@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/17 13:19:50 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/19 02:16:45 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
 void	print_error_and_exit(void);
 int		parse_int(const char *str);
 void	check_duplicates(int *arr, int count);
-int		*parse_args(int argc, char **argv);
+int		*parse_args(int argc, char **argv, int *count_out);
 
 //sort
 int		is_sorted(t_list *stack_a);

@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:59:13 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/17 14:29:36 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/19 01:50:50 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers)
 		j = 0;
 		while (j < size)
 		{
+			if (is_sorted(*stack_a))
+    			break;
 			if (((*(int *)((*stack_a)->content) >> i) & 1) == 0)
 				push_b(stack_a, stack_b);
 			else
