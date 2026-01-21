@@ -13,7 +13,8 @@ obj/
 
 # Executables
 push_swap
-checker
+checker_linux
+checker_Mac
 
 # Temporary / editor files
 *~

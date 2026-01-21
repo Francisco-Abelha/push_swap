@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 19:08:33 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/17 02:28:59 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:03:59 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	bring_min_to_top(t_list **stack_a)
 	min = find_min(*stack_a);
 	index = find_index(*stack_a, min);
 	size = ft_lstsize(*stack_a);
-
 	if (index <= size / 2)
 	{
 		while (index-- > 0)
@@ -85,7 +84,6 @@ void	sort_3(t_list **stack_a)
 	x = *(int *)(*stack_a)->content;
 	y = *(int *)(*stack_a)->next->content;
 	z = *(int *)(*stack_a)->next->next->content;
-
 	if ((x > y && y < z) && (x < z))
 		swap_a(stack_a);
 	else if (x > y && y > z)

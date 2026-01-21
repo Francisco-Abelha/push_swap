@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:59:13 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/19 01:50:50 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:03:22 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	bit_length(unsigned int value)
 {
 	unsigned int	max_bits;
-	
+
 	max_bits = 0;
 	while (value > 0)
 	{
@@ -73,7 +73,7 @@ static void	assign_index(t_list **stack_a, int *arr, int n)
 
 void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers)
 {
-	unsigned int 	size;
+	unsigned int	size;
 	unsigned int	max_value;
 	unsigned int	max_bits;
 	unsigned int	i;
@@ -94,7 +94,7 @@ void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers)
 		while (j < size)
 		{
 			if (is_sorted(*stack_a))
-    			break;
+				break ;
 			if (((*(int *)((*stack_a)->content) >> i) & 1) == 0)
 				push_b(stack_a, stack_b);
 			else
