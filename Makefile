@@ -6,7 +6,7 @@
 #    By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/01 18:20:26 by fgoncal2          #+#    #+#              #
-#    Updated: 2026/01/21 18:58:00 by fgoncal2         ###   ########.fr        #
+#    Updated: 2026/01/23 18:42:04 by fgoncal2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS = $(SRC_DIR)/push_swap.c \
 	   $(SRC_DIR)/reverse_rotate.c \
 	   $(SRC_DIR)/error.c \
 	   $(SRC_DIR)/sort.c \
-	   $(SRC_DIR)/radix.c
+	   $(SRC_DIR)/radix.c \
+	   $(SRC_DIR)/utils.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

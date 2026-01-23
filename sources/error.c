@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 16:07:46 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/21 19:00:29 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/23 20:42:09 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	*parse_single_arg(char *arg, int *count_out)
 	char	**split;
 	int		*numbers;
 	int		i;
+	int		error;
 
 	split = ft_split(arg, ' ');
 	if (!split)
@@ -49,22 +50,22 @@ static int	*parse_single_arg(char *arg, int *count_out)
 	if (!numbers)
 	{
 		free_split(split);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	i = 0;
 	while (i < *count_out)
 	{
-		numbers[i] = parse_int(split[i]);
+		numbers[i] = parse_int(split[i], &error);
+		if (error)
+		{
+			free(numbers);
+			free_split(split);
+			return(NULL);
+		}
 		i++;
 	}
 	free_split(split);
 	return (numbers);
-}
-
-void	print_error_and_exit(void)
-{
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
 }
 
 long	ft_atoi_safe(const char *str)
@@ -88,29 +89,39 @@ long	ft_atoi_safe(const char *str)
 	return (result * sign);
 }
 
-int	parse_int(const char *str)
+int	parse_int(const char *str, int *error)
 {
 	long	num;
 	int		i;
 
+	*error = 0;
 	if ((!*str || (*str == '+' || *str == '-')) && (!str[1]))
-		print_error_and_exit();
-	num = ft_atoi_safe(str);
+	{
+		*error = 1;
+		return (0);
+	}
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			print_error_and_exit();
+		{
+			*error = 1;
+			return (0);
+		}
 		i++;
 	}
+	num = ft_atoi_safe(str);
 	if (num < INT_MIN || num > INT_MAX)
-		print_error_and_exit();
+	{
+		*error = 1;
+		return (0);
+	}
 	return ((int)num);
 }
 
-void	check_duplicates(int *arr, int count)
+int	check_duplicates(int *arr, int count)
 {
 	int	i;
 	int	j;
@@ -122,42 +133,80 @@ void	check_duplicates(int *arr, int count)
 		while (j < count)
 		{
 			if (arr[i] == arr[j])
-				print_error_and_exit();
+				return (1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 int	*parse_args(int argc, char **argv, int *count_out)
 {
 	int	*numbers;
 	int	i;
+	int	error;
+
+	*count_out = 0;
 
 	if (argc < 2)
-	{
-		*count_out = 0;
 		return (NULL);
-	}
 	if (argc == 2)
 	{
+		// Check if arg is empty or only whitespace BEFORE calling parse_single_arg
+		if (!argv[1] || !argv[1][0])
+			return (NULL);  // Empty string - not an error
+		// Check if only whitespace
+		i = 0;
+		while (argv[1][i] && (argv[1][i] == ' ' || argv[1][i] == '\t'))
+			i++;
+		if (!argv[1][i])
+			return (NULL);  // Only whitespace - not an error
 		numbers = parse_single_arg(argv[1], count_out);
 		if (!numbers)
+		{
+			if (*count_out == 0)
+				return (NULL);
+			*count_out = -1;
 			return (NULL);
+		}
+		if (check_duplicates(numbers, *count_out))
+		{
+			free(numbers);
+			*count_out = -1;
+			return (NULL);
+		}
+		// If parse_single_arg returns NULL here, it's a real error
+		// (invalid numbers, duplicates, etc.)
+		return (numbers);
 	}
 	else
 	{
-		*count_out = argc - 1;
+		*count_out = argc -1;
 		numbers = malloc(sizeof(int) * (*count_out));
 		if (!numbers)
-			exit(EXIT_FAILURE);
+		{
+			*count_out = -1;
+			return (NULL);
+		}
 		i = 0;
 		while (i < *count_out)
 		{
-			numbers[i] = parse_int(argv[i + 1]);
+			numbers[i] = parse_int(argv[i + 1], &error);
+			if (error)
+			{
+				free(numbers);
+				*count_out = -1;
+				return (NULL);
+			}
 			i++;
 		}
 	}
-	check_duplicates(numbers, *count_out);
+	if (check_duplicates(numbers, *count_out))
+	{
+		free(numbers);
+		*count_out = -1;
+		return (NULL);
+	}
 	return (numbers);
 }

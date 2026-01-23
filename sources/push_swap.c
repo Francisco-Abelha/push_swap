@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/21 19:01:18 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/23 20:42:40 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@ int	main(int argc, char **argv)
 	int		*numbers;
 	int		count;
 
-	numbers = parse_args(argc, argv, &count);
-	if (!numbers)
-		return (1);
 	stack_a = NULL;
 	stack_b = NULL;
+	numbers = parse_args(argc, argv, &count);
+	if (!numbers)
+	{
+		if (count == -1)  // Error occurred
+			error_and_cleanup(&stack_a, &stack_b, NULL);
+		return (0);  // Empty input, exit gracefully
+	}
 	if (count > 0)
 	{
 		stack_a = ft_lstnew(&numbers[0]);
+		if (!stack_a)
+			error_and_cleanup(&stack_a, &stack_b, numbers);
 		i = 1;
 		while (i < count)
 		{
@@ -36,6 +42,14 @@ int	main(int argc, char **argv)
 		}
 	}
 	if (is_sorted(stack_a))
+	{
+		free_stack(&stack_a);
+		free(numbers);
 		return (0);
+	}
 	sort(&stack_a, &stack_b, numbers);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
+	free(numbers);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:59:13 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/21 19:03:22 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:51:42 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers)
 	ft_memcpy(numbers_copy, numbers, size * sizeof(int));
 	bubble_sort(numbers_copy, size);
 	assign_index(stack_a, numbers_copy, size);
+	free(numbers_copy);
 	while (i < max_bits)
 	{
 		j = 0;
