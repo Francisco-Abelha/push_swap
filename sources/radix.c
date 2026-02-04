@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 23:59:13 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/01/21 19:03:22 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:39:01 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static int	bit_length(unsigned int value)
-{
-	unsigned int	max_bits;
-
-	max_bits = 0;
-	while (value > 0)
-	{
-		max_bits++;
-		value >>= 1;
-	}
-	return (max_bits);
-}
 
 static void	bubble_sort(int	*arr, int n)
 {
@@ -71,38 +58,51 @@ static void	assign_index(t_list **stack_a, int *arr, int n)
 	}
 }
 
-void	radix_sort(t_list **stack_a, t_list **stack_b, int *numbers)
+void	assign_sorted_indices(t_list **stack_a, int *values, unsigned int size)
+{
+	int	*values_copy;
+
+	values_copy = malloc(sizeof(int) * size);
+	ft_memcpy(values_copy, values, size * sizeof(int));
+	bubble_sort(values_copy, size);
+	assign_index(stack_a, values_copy, size);
+	free(values_copy);
+}
+
+void	bit_pass(t_list **a, t_list **b, unsigned int size, unsigned int bit)
+{
+	unsigned int	j;
+
+	j = 0;
+	while (j < size)
+	{
+		if (is_sorted(*a))
+			break ;
+		if (((*(int *)((*a)->content) >> bit) & 1) == 0)
+			push_b(a, b);
+		else
+			rotate_a(a);
+		j++;
+	}
+	while (*b != NULL)
+		push_a(a, b);
+}
+
+void	radix_sort(t_list **stack_a, t_list **stack_b, int *values)
 {
 	unsigned int	size;
 	unsigned int	max_value;
 	unsigned int	max_bits;
 	unsigned int	i;
-	unsigned int	j;
-	int				*numbers_copy;
 
-	i = 0;
 	size = ft_lstsize(*stack_a);
 	max_value = size - 1;
 	max_bits = bit_length(max_value);
-	numbers_copy = malloc(sizeof(int) * size);
-	ft_memcpy(numbers_copy, numbers, size * sizeof(int));
-	bubble_sort(numbers_copy, size);
-	assign_index(stack_a, numbers_copy, size);
+	assign_sorted_indices(stack_a, values, size);
+	i = 0;
 	while (i < max_bits)
 	{
-		j = 0;
-		while (j < size)
-		{
-			if (is_sorted(*stack_a))
-				break ;
-			if (((*(int *)((*stack_a)->content) >> i) & 1) == 0)
-				push_b(stack_a, stack_b);
-			else
-				rotate_a(stack_a);
-			j++;
-		}
-		while (*stack_b != NULL)
-			push_a(stack_a, stack_b);
+		bit_pass(stack_a, stack_b, size, i);
 		i++;
 	}
 }
