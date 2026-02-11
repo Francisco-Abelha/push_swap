@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:31:32 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/02/03 17:35:41 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:43:05 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	ft_atoi_checked(const char *str)
+int	ft_atoi_checked(const char *str, int *out)
 {
 	long	result;
 	int		sign;
@@ -30,10 +30,11 @@ int	ft_atoi_checked(const char *str)
 		result = result * 10 + (*str - '0');
 		if ((sign == 1 && result > INT_MAX)
 			|| (sign == -1 && -(result) < INT_MIN))
-			error_exit(NULL, NULL);
+			return (0);
 		str++;
 	}
-	return ((int)(result * sign));
+	*out = (int)(result * sign);
+	return (1);
 }
 
 char	**safe_split(char *arg)
@@ -42,11 +43,14 @@ char	**safe_split(char *arg)
 
 	split = ft_split(arg, ' ');
 	if (!split || !split[0])
+	{
+		free_split(split);
 		error_exit(NULL, NULL);
+	}
 	return (split);
 }
 
-void	append_split(char **tokens, char **split, int *k)
+int	append_split(char **tokens, char **split, int *k)
 {
 	int	j;
 
@@ -55,10 +59,11 @@ void	append_split(char **tokens, char **split, int *k)
 	{
 		tokens[*k] = ft_strdup(split[j]);
 		if (!tokens[*k])
-			error_exit(NULL, NULL);
+			return (free_split(tokens), free_split(split), 0);
 		(*k)++;
 		j++;
 	}
+	return (0);
 }
 
 int	count_tokens(int argc, char **argv)

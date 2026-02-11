@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:33:39 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/02/03 17:35:17 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:42:00 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ static char	**collect_tokens(int argc, char **argv)
 	count = count_tokens(argc, argv);
 	tokens = malloc(sizeof(char *) * (count + 1));
 	if (!tokens)
-		error_exit(NULL, NULL);
+		return (NULL);
 	i = 1;
 	k = 0;
 	while (i < argc)
 	{
 		split = safe_split(argv[i]);
-		append_split(tokens, split, &k);
+		if (!split)
+			return (free_split(tokens), NULL);
+		if (!append_split(tokens, split, &k))
+			return (free_split(split), free_split(tokens), NULL);
 		free_split(split);
 		i++;
 	}
@@ -37,7 +40,7 @@ static char	**collect_tokens(int argc, char **argv)
 	return (tokens);
 }
 
-static void	validate_token(const char *token)
+static int	validate_token(const char *token)
 {
 	int	i;
 
@@ -45,16 +48,17 @@ static void	validate_token(const char *token)
 	if (token[i] == '+' || token[i] == '-')
 		i++;
 	if (!token[i])
-		error_exit(NULL, NULL);
+		return (0);
 	while (token[i])
 	{
 		if (!ft_isdigit(token[i]))
-			error_exit(NULL, NULL);
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
-static void	check_duplicates(int *values, int count)
+static int	check_duplicates(int *values, int count)
 {
 	int	i;
 	int	j;
@@ -66,14 +70,15 @@ static void	check_duplicates(int *values, int count)
 		while (j < count)
 		{
 			if (values[i] == values[j])
-				error_exit(NULL, NULL);
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
-static void	build_stack(t_list **stack_a, int *values, int count)
+static int	build_stack(t_list **stack_a, int *values, int count)
 {
 	t_list	*node;
 	int		i;
@@ -83,10 +88,14 @@ static void	build_stack(t_list **stack_a, int *values, int count)
 	{
 		node = ft_lstnew(&values[i]);
 		if (!node)
-			error_exit(stack_a, NULL);
+		{
+			free_stack(stack_a);
+			return (0);
+		}
 		ft_lstadd_back(stack_a, node);
 		i++;
 	}
+	return (1);
 }
 
 int	*parse_arguments(int argc, char **argv, t_list **stack_a)
@@ -97,19 +106,29 @@ int	*parse_arguments(int argc, char **argv, t_list **stack_a)
 	int		i;
 
 	tokens = collect_tokens(argc, argv);
-	count = count_tokens(argc, argv);
+	if (!tokens)
+		return (NULL);
+	count = 0;
+	while (tokens[count])
+		count++;
+	if (count == 0)
+		return (free_split(tokens), NULL);
 	values = malloc(sizeof(int) * count);
 	if (!values)
-		error_exit(stack_a, NULL);
+		return (free_split(tokens), NULL);
 	i = 0;
 	while (i < count)
 	{
-		validate_token(tokens[i]);
-		values[i] = ft_atoi_checked(tokens[i]);
+		if (!validate_token(tokens[i]))
+			return (free(values), free_split(tokens), NULL);
+		if (!ft_atoi_checked(tokens[i], &values[i]))
+			return (free(values), free_split(tokens), NULL);
 		i++;
 	}
-	check_duplicates(values, count);
-	build_stack(stack_a, values, count);
+	if (!check_duplicates(values, count))
+		return (free(values), free_split(tokens), NULL);
+	if (!build_stack(stack_a, values, count))
+		return (free(values), free_split(tokens), NULL);
 	free_split(tokens);
 	return (values);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:15:17 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/02/03 16:55:14 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:44:06 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	values = parse_arguments(argc, argv, &stack_a);
-	if (is_sorted(stack_a))
-	{
-		free(stack_a);
+	if (argc < 2)
 		return (0);
-	}
-	sort(&stack_a, &stack_b, values);
+	values = parse_arguments(argc, argv, &stack_a);
+	if (!values)
+		error_exit(&stack_a, &stack_b);
+	if (!is_sorted(stack_a))
+		sort(&stack_a, &stack_b, values);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	free(values);
+	return (0);
 }

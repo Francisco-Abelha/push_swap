@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgoncal2 <fgoncal2@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: fgoncal2 <fgoncal2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:12:59 by fgoncal2          #+#    #+#             */
-/*   Updated: 2026/02/04 15:38:32 by fgoncal2         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:43:14 by fgoncal2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	assign_sorted_indices(t_list **stack_a, int *values, unsigned int size);
 void	bit_pass(t_list **a, t_list **b, unsigned int size, unsigned int bit);
 
 //utils
-int		ft_atoi_checked(const char *str);
+int		ft_atoi_checked(const char *str, int *out);
 char	**safe_split(char *arg);
-void	append_split(char **tokens, char **split, int *k);
+int		append_split(char **tokens, char **split, int *k);
 int		count_tokens(int argc, char **argv);
 
 //sort utils
