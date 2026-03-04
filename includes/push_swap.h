@@ -51,6 +51,7 @@ int		ft_atoi_checked(const char *str, int *out);
 char	**safe_split(char *arg);
 int		append_split(char **tokens, char **split, int *k);
 int		count_tokens(int argc, char **argv);
+int		validate_token(const char *token);
 
 //sort utils
 void	bring_min_to_top(t_list **stack_a);

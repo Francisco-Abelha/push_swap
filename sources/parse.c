@@ -30,10 +30,7 @@ static char	**collect_tokens(int argc, char **argv)
 	{
 		split = safe_split(argv[i]);
 		if (!split)
-		{
-			tokens[k] = NULL;
-			return (free_split(tokens), NULL);
-		}
+			return (tokens[k] = NULL, free_split(tokens), NULL);
 		if (!append_split(tokens, split, &k))
 			return (free_split(split), free_split(tokens), NULL);
 		free_split(split);
@@ -41,24 +38,6 @@ static char	**collect_tokens(int argc, char **argv)
 	}
 	tokens[k] = NULL;
 	return (tokens);
-}
-
-static int	validate_token(const char *token)
-{
-	int	i;
-
-	i = 0;
-	if (token[i] == '+' || token[i] == '-')
-		i++;
-	if (!token[i])
-		return (0);
-	while (token[i])
-	{
-		if (!ft_isdigit(token[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 static int	check_duplicates(int *values, int count)
@@ -101,12 +80,27 @@ static int	build_stack(t_list **stack_a, int *values, int count)
 	return (1);
 }
 
+static int	fill_values(char **tokens, int *values, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (!validate_token(tokens[i]))
+			return (0);
+		if (!ft_atoi_checked(tokens[i], &values[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	*parse_arguments(int argc, char **argv, t_list **stack_a)
 {
 	char	**tokens;
 	int		*values;
 	int		count;
-	int		i;
 
 	tokens = collect_tokens(argc, argv);
 	if (!tokens)
@@ -119,15 +113,8 @@ int	*parse_arguments(int argc, char **argv, t_list **stack_a)
 	values = malloc(sizeof(int) * count);
 	if (!values)
 		return (free_split(tokens), NULL);
-	i = 0;
-	while (i < count)
-	{
-		if (!validate_token(tokens[i]))
-			return (free(values), free_split(tokens), NULL);
-		if (!ft_atoi_checked(tokens[i], &values[i]))
-			return (free(values), free_split(tokens), NULL);
-		i++;
-	}
+	if (!fill_values(tokens, values, count))
+		return (free(values), free_split(tokens), NULL);
 	if (!check_duplicates(values, count))
 		return (free(values), free_split(tokens), NULL);
 	if (!build_stack(stack_a, values, count))

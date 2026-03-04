@@ -91,3 +91,21 @@ int	count_tokens(int argc, char **argv)
 	}
 	return (count);
 }
+
+int	validate_token(const char *token)
+{
+	int	i;
+
+	i = 0;
+	if (token[i] == '+' || token[i] == '-')
+		i++;
+	if (!token[i])
+		return (0);
+	while (token[i])
+	{
+		if (!ft_isdigit(token[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
