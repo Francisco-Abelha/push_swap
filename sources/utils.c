@@ -45,7 +45,7 @@ char	**safe_split(char *arg)
 	if (!split || !split[0])
 	{
 		free_split(split);
-		error_exit(NULL, NULL);
+		return (NULL);
 	}
 	return (split);
 }
@@ -63,7 +63,7 @@ int	append_split(char **tokens, char **split, int *k)
 		(*k)++;
 		j++;
 	}
-	return (0);
+	return (1);
 }
 
 int	count_tokens(int argc, char **argv)

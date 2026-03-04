@@ -30,7 +30,10 @@ static char	**collect_tokens(int argc, char **argv)
 	{
 		split = safe_split(argv[i]);
 		if (!split)
+		{
+			tokens[k] = NULL;
 			return (free_split(tokens), NULL);
+		}
 		if (!append_split(tokens, split, &k))
 			return (free_split(split), free_split(tokens), NULL);
 		free_split(split);
